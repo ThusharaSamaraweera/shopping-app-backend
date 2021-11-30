@@ -1,0 +1,39 @@
+type Query {
+    getAllCategories: [Category]
+    getAllProducts: [Product]
+}
+
+type Mutation {
+    addProduct(newProduct: InputProduct!): Product
+    addCategory(newCategory: InputProductCategory!): Category
+}
+
+type Category {
+    id:String!
+    title:String!
+}
+
+type Product {
+    id: String!
+    title: String!
+    category: Category!
+    quantity: Float!
+    regular_price: Float!
+    discount_price: Float!
+    image: String!
+}
+
+input InputProductCategory {
+    id: String
+    title: String!
+}
+
+input InputProduct {
+    id:String
+    title: String!
+    category: InputProductCategory!
+    quantity: Float!
+    regular_price: Float!
+    discount_price: Float!
+    image: String!
+}
