@@ -6,6 +6,7 @@ export const addProductService = async (newProduct: INewProduct) => {
   try {
     return await Products.create(newProduct);
   } catch (err) {
+    console.log(err)
     throw new Error('Failed to create product');
   }
 };
