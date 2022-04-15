@@ -1,19 +1,10 @@
 import {IResolvers} from 'graphql-tools';
-import {ProductsController} from "../../controllers/products.controller";
-
-
-const productController = new ProductsController();
+import query from './querys';
+import mutations from './mutations';
 
 const resolvers: IResolvers = {
-  Query: {
-    getAllProducts: async () => {
-      return await productController.getAllProducts();
-    }
-  },
-
-  Mutation: {
-
-  },
+  Query: query,
+  Mutation: mutations
 };
 
 export default resolvers;
