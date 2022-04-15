@@ -1,4 +1,4 @@
-import { UserService } from "../services/user.service";
+import UserService from "../services/user.service";
 import { INewUser } from "../types/userTypes";
 
 export class UsersController {

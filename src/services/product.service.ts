@@ -2,7 +2,7 @@ import { INewProduct } from '../types/productTypes';
 
 const Products = require('../models/products');
 
-export class productService {
+export default class productService {
   static async addProduct(newProduct: INewProduct){
     try {
       return await Products.create(newProduct);

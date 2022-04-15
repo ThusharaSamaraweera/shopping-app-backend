@@ -1,7 +1,7 @@
 import { INewUser } from '../types/userTypes';
 const User = require('../models/User');
 
-export class UserService {
+export default class UserService {
   static async addUser(newUser: INewUser) {
     try {
       return await User.create(newUser);

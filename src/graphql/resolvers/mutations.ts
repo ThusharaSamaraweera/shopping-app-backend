@@ -1,6 +1,5 @@
-import { CategoryController } from '../../controllers/category.controller';
+import CategoryController from '../../controllers/category.controller';
 import { ProductsController } from '../../controllers/products.controller';
-import { INewProduct } from '../../types/productTypes';
 
 const mutations = {
   async addProduct(_: any, { newProduct }: any) {
