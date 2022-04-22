@@ -11,6 +11,9 @@ const mutations = {
   },
   async addUser(_: any, {newUser} : any){
     return await UsersController.addUser(newUser)
+  },
+  async login(_: any, {email, password}: any){
+    return await UsersController.login(email, password)
   }
 };
 
