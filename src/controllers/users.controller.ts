@@ -1,6 +1,7 @@
 import UserService from '../services/user.service';
 import { INewUser, IUser } from '../types/userTypes';
 import CryptoJS from 'crypto-js';
+import jwt from 'jsonwebtoken';
 
 export class UsersController {
   static async addUser(newUser: INewUser) {
@@ -26,5 +27,9 @@ export class UsersController {
         throw new Error('Invalid password');
       }
     }
+  }
+
+  static getTokenByEmail(email: string) {
+    return jwt.sign({ email }, process.env.auth_encryption_salt!);
   }
 }

@@ -9,12 +9,15 @@ const mutations = {
   async addCategory(_: any, { newCategory }: any) {
     return await CategoryController.addCategory(newCategory);
   },
-  async addUser(_: any, {newUser} : any){
-    return await UsersController.addUser(newUser)
+  async addUser(_: any, { newUser }: any) {
+    return await UsersController.addUser(newUser);
   },
-  async login(_: any, {email, password}: any){
-    return await UsersController.login(email, password)
-  }
+  async login(_: any, { email, password }: any) {
+    return await UsersController.login(email, password);
+  },
+  getTokenByEmail(_: any, { email }: any) {
+    return UsersController.getTokenByEmail(email);
+  },
 };
 
 export default mutations;
