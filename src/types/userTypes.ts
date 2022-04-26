@@ -24,3 +24,15 @@ export interface IUser {
   updatedAt: string
   type: 'user' | 'admin'
 }
+
+export interface ILogedUser {
+  email: string
+  name: string
+  address: string
+  postalCode: string
+  country: string
+  phoneNumber: string
+  city: string
+  type: 'user' | 'admin'
+  token: string;
+}

@@ -1,10 +1,11 @@
+import { Context } from 'apollo-server-core';
 import CategoryController from '../../controllers/category.controller';
 import { ProductsController } from '../../controllers/products.controller';
 import { UsersController } from '../../controllers/users.controller';
 
 const mutations = {
-  async addProduct(_: any, { newProduct }: any) {
-    return await ProductsController.addProduct(newProduct);
+  async addProduct(_: any, { newProduct }: any, ctx: Context) {
+    return await ProductsController.addProduct(ctx, newProduct);
   },
   async addCategory(_: any, { newCategory }: any) {
     return await CategoryController.addCategory(newCategory);

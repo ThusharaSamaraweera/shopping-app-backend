@@ -1,7 +1,8 @@
 import UserService from '../services/user.service';
-import { INewUser, IUser } from '../types/userTypes';
+import { ILogedUser, INewUser, IUser } from '../types/userTypes';
 import CryptoJS from 'crypto-js';
 import jwt from 'jsonwebtoken';
+import { UserInputError } from 'apollo-server-express';
 
 export class UsersController {
   static async addUser(newUser: INewUser) {
@@ -9,7 +10,7 @@ export class UsersController {
       const password: string = CryptoJS.SHA256(newUser.password).toString(CryptoJS.enc.Hex);
       return await UserService.addUser({ ...newUser, password });
     } else {
-      throw new Error('Email already exists');
+      throw new UserInputError('Email already exists');
     }
   }
 
@@ -17,19 +18,33 @@ export class UsersController {
     const tempUser: IUser | null = await UserService.getUserByEmail(email);
 
     if (!tempUser) {
-      throw new Error('Invalid credentials');
+      throw new UserInputError('Invalid credentials');
     } else {
       const hashPassword: string = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
       if (tempUser.password === hashPassword) {
-        return tempUser;
+        const token = jwt.sign({ email }, process.env.auth_encryption_salt!, {expiresIn: 60*60})
+
+        const responseUser: ILogedUser = {
+          name: tempUser.name,
+          address: tempUser.address,
+          city: tempUser.city,
+          country: tempUser.country,
+          email: tempUser.email,
+          phoneNumber: tempUser.phoneNumber,
+          postalCode: tempUser.postalCode,
+          type: tempUser.type,
+          token
+        }
+        return responseUser;
+        
       } else {
-        throw new Error('Invalid password');
+        throw new UserInputError('Invalid password');
       }
     }
   }
 
   static getTokenByEmail(email: string) {
-    return jwt.sign({ email }, process.env.auth_encryption_salt!);
+    return jwt.sign({ email }, process.env.auth_encryption_salt!, {expiresIn: 60*60});
   }
 }

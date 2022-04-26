@@ -1,3 +1,4 @@
+import { Context } from 'apollo-server-core';
 import CategoryController from '../../controllers/category.controller';
 import { ProductsController } from '../../controllers/products.controller';
 
