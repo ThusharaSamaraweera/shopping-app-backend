@@ -1,5 +1,4 @@
 import { UserInputError } from "apollo-server-express";
-import { IInputCategory } from "../types/categoryTypes";
 import { INewOrder } from "../types/orderTypes";
 import { IUser}  from '../types/userTypes'
 
@@ -37,6 +36,14 @@ export default class orderService {
       
     } catch (error) {
       return new Error("Failed to create order" + error)
+    }
+  }
+
+  static async getAllOrders(){
+    try {
+      return await Order.find({}).populate('requestedUser', '-password')
+    } catch (error) {
+      throw new Error('Failed to get Orders')
     }
   }
 }
