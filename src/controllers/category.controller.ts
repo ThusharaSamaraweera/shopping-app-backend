@@ -1,8 +1,8 @@
 import CategoryService from '../services/category.service';
-import { ICategory } from '../types/categoryTypes';
+import { IInputCategory } from '../types/categoryTypes';
 
 export default class CategoryController {
-  static async addCategory(newCategory: ICategory) {
+  static async addCategory(newCategory: IInputCategory) {
     return await CategoryService.addCategory(newCategory);
   }
 

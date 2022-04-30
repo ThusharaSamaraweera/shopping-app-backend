@@ -1,5 +1,6 @@
 import { Context } from 'apollo-server-core';
 import CategoryController from '../../controllers/category.controller';
+import { OrderController } from '../../controllers/order.controller';
 import { ProductsController } from '../../controllers/products.controller';
 import { UsersController } from '../../controllers/users.controller';
 
@@ -18,6 +19,9 @@ const mutations = {
   },
   getTokenByEmail(_: any, { email }: any) {
     return UsersController.getTokenByEmail(email);
+  },
+  async placeOrder(_: any, { newOrder }: any) {
+    return await OrderController.placeOrder(newOrder);
   },
 };
 

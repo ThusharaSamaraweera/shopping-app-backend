@@ -7,8 +7,9 @@ type Mutation {
     login(email: String!, password: String!): LogedUser
     addProduct(newProduct: InputProduct!): Product
     addCategory(newCategory: InputProductCategory!): Category
-    addUser(newUser: InputUser!): User
+    addUser(newUser: InputUser!): LogedUser
     getTokenByEmail(email: String!): String!
+    placeOrder(newOrder: InputOrder!): Order!
 }
 
 type Category {
@@ -82,4 +83,49 @@ type LogedUser {
     updatedAt: String
     type: String!
     token: String!
+}
+
+input InputOrder {
+    id: String
+    orderCode:String!
+    changeShippingAddress:Boolean!
+    requestedUser: String!
+    shippingDetails: InputShippingDetails!
+    productList: [InputProduct!]!
+    status: String!
+    paymentType: String!
+    paymentStatus: Boolean!
+    deliveryInstructions:String
+    requestedDate:String!
+}
+
+input InputShippingDetails {
+    fullName: String!
+    address: String!
+    city: String!
+    postalCode: String!
+    country: String!
+    contactNumber: String!
+}
+
+type Order {
+    id: String!
+    orderCode:String!
+    requestedUser: User
+    shippingDetails: ShippingDetails!
+    productList: [Product!]!
+    status:String!
+    paymentType:String!
+    paymentStatus:Boolean!
+    deliveryInstructions:String
+    requestedDate:String!
+}
+
+type ShippingDetails {
+    fullName: String!
+    address: String!
+    city: String!
+    postalCode: String!
+    country: String!
+    contactNumber: String!
 }

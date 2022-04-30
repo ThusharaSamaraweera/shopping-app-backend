@@ -1,3 +1,4 @@
-export interface ICategory {
+export interface IInputCategory {
   title: string
 }
+

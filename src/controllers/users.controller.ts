@@ -8,7 +8,24 @@ export class UsersController {
   static async addUser(newUser: INewUser) {
     if (!(await UserService.getUserByEmail(newUser.email))) {
       const password: string = CryptoJS.SHA256(newUser.password).toString(CryptoJS.enc.Hex);
-      return await UserService.addUser({ ...newUser, password });
+      const user: ILogedUser = await UserService.addUser({ ...newUser, password });
+
+      const token: string = this.getTokenByEmail(newUser.email);
+
+      const loggedUser: ILogedUser = {
+        name: newUser.name,
+        address: newUser.address,
+        city: newUser.city,
+        country: newUser.country,
+        email: newUser.email,
+        phoneNumber: newUser.phoneNumber,
+        postalCode: newUser.postalCode,
+        type: newUser.userType,
+        token
+      }
+
+      return loggedUser;
+
     } else {
       throw new UserInputError('Email already exists');
     }
@@ -23,7 +40,7 @@ export class UsersController {
       const hashPassword: string = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
 
       if (tempUser.password === hashPassword) {
-        const token = jwt.sign({ email }, process.env.auth_encryption_salt!, {expiresIn: 60*60})
+        const token = this.getTokenByEmail(tempUser.email)
 
         const responseUser: ILogedUser = {
           name: tempUser.name,
