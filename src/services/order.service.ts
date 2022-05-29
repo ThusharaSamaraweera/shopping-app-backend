@@ -4,7 +4,6 @@ import { IUser}  from '../types/userTypes'
 
 const User = require('../models/User');
 const Order = require('../models/order')
-const Category = require('../models/Category')
 
 export default class orderService {
   static async placeOrder(newOrder: INewOrder){
@@ -24,7 +23,7 @@ export default class orderService {
           ...newOrder,
           requestedUser: userObject.id,
           shippingDetails: {
-            name: userObject.name,
+            fullName: userObject.name,
             address: userObject.address,
             city: userObject.city,
             postalCode: userObject.postalCode,

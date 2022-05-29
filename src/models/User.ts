@@ -33,7 +33,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    type: {
+    userType: {
       type: String,
       required: true,
     },

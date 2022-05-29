@@ -22,10 +22,11 @@ export interface IUser {
   password: string
   createdAt: string
   updatedAt: string
-  type: 'user' | 'admin'
+  userType: 'user' | 'admin'
 }
 
 export interface ILogedUser {
+  id: string
   email: string
   name: string
   address: string
@@ -33,6 +34,6 @@ export interface ILogedUser {
   country: string
   phoneNumber: string
   city: string
-  type: 'user' | 'admin'
+  userType: 'user' | 'admin'
   token: string;
 }

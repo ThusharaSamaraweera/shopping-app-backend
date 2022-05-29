@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import { UserInputError } from 'apollo-server-express';
 
 export class UsersController {
+  
   static async addUser(newUser: INewUser) {
     if (!(await UserService.getUserByEmail(newUser.email))) {
       const password: string = CryptoJS.SHA256(newUser.password).toString(CryptoJS.enc.Hex);
@@ -12,19 +13,19 @@ export class UsersController {
 
       const token: string = this.getTokenByEmail(newUser.email);
 
-      const loggedUser: ILogedUser = {
-        name: newUser.name,
-        address: newUser.address,
-        city: newUser.city,
-        country: newUser.country,
-        email: newUser.email,
-        phoneNumber: newUser.phoneNumber,
-        postalCode: newUser.postalCode,
-        type: newUser.userType,
-        token
-      }
-
-      return loggedUser;
+      // const loggedUser: ILogedUser = {
+      //   name: newUser.name,
+      //   address: newUser.address,
+      //   city: newUser.city,
+      //   country: newUser.country,
+      //   email: newUser.email,
+      //   phoneNumber: newUser.phoneNumber,
+      //   postalCode: newUser.postalCode,
+      //   userType: newUser.userType,
+      //   token
+      // }
+      user.token = token
+      return user;
 
     } else {
       throw new UserInputError('Email already exists');
@@ -32,7 +33,7 @@ export class UsersController {
   }
 
   static async login(email: string, password: string) {
-    const tempUser: IUser | null = await UserService.getUserByEmail(email);
+    const tempUser = await UserService.getUserByEmail(email);
 
     if (!tempUser) {
       throw new UserInputError('Invalid credentials');
@@ -42,18 +43,19 @@ export class UsersController {
       if (tempUser.password === hashPassword) {
         const token = this.getTokenByEmail(tempUser.email)
 
-        const responseUser: ILogedUser = {
-          name: tempUser.name,
-          address: tempUser.address,
-          city: tempUser.city,
-          country: tempUser.country,
-          email: tempUser.email,
-          phoneNumber: tempUser.phoneNumber,
-          postalCode: tempUser.postalCode,
-          type: tempUser.type,
-          token
-        }
-        return responseUser;
+        // const responseUser: ILogedUser = {
+        //   name: tempUser.name,
+        //   address: tempUser.address,
+        //   city: tempUser.city,
+        //   country: tempUser.country,
+        //   email: tempUser.email,
+        //   phoneNumber: tempUser.phoneNumber,
+        //   postalCode: tempUser.postalCode,
+        //   userType: tempUser.userType,
+        //   token
+        // }
+        tempUser.token = token;
+        return tempUser;
         
       } else {
         throw new UserInputError('Invalid password');

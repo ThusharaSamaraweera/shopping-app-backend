@@ -18,7 +18,7 @@ export class MongoHelper {
       return await User.find({ email: email })
         .then((response: any) => {
           if (response.length > 0) {
-            return { isUserLogged: true, email: email, type:response[0].type };
+            return { isUserLogged: true, email: email, userType:response[0].userType };
           }
           return { isUserLogged: false };
         });
