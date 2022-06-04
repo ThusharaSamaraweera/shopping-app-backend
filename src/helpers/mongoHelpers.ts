@@ -36,6 +36,7 @@ export class MongoHelper {
       .connect(Config.mongoUrl, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
+        useFindAndModify: false,
       })
       .then(() => {
         console.log('Connected to MongoDb');

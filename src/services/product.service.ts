@@ -18,4 +18,20 @@ export default class productService {
       throw new Error('Products not found');
     }
   };
+
+  static async getOneProduct(id: string) {
+    try {
+      return await Products.findById({_id: id})
+    } catch (error) {
+      throw new Error('Product not found')
+    }
+  }
+
+  static async updateProduct(id: string, newProduct: INewProduct){
+    try {
+      return await Products.findOneAndUpdate({_id: id}, newProduct, {new: true})
+    } catch (error) {
+      throw new Error('Failed to update product')
+    }
+  }
 }

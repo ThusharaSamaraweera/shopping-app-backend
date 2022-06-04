@@ -23,6 +23,9 @@ const mutations = {
   async placeOrder(_: any, { newOrder }: any) {
     return await OrderController.placeOrder(newOrder);
   },
+  async changeOrderStatus(_: any, {id, newStatus}: any){
+    return await OrderController.changeOrderStatus(id, newStatus)
+  }
 };
 
 export default mutations;

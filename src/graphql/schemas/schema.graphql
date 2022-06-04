@@ -11,6 +11,7 @@ type Mutation {
     addUser(newUser: InputUser!): LogedUser
     getTokenByEmail(email: String!): String!
     placeOrder(newOrder: InputOrder!): Order!
+    changeOrderStatus(id: String!, newStatus: String!): changeOrderStatueResponse
 }
 
 type Category {
@@ -129,4 +130,9 @@ type ShippingDetails {
     postalCode: String!
     country: String!
     contactNumber: String!
+}
+
+type changeOrderStatueResponse {
+    order: Order,
+    errorMassages: [String]
 }
