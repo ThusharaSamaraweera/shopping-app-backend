@@ -18,4 +18,12 @@ export default class CategoryService {
       throw new Error('Categories not found');
     }
   }
+
+  static async findCategory(title: string){
+    try {
+      return await Category.findOne({title: title})
+    } catch (error) {
+      throw new Error(`${title} category not found`)
+    }
+  }
 }

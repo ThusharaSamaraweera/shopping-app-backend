@@ -23,7 +23,7 @@ type Product {
     id: String!
     title: String!
     category: Category!
-    quantity: Float!
+    quantity: Int!
     regular_price: Float!
     discount_price: Float!
     image: String!
@@ -38,7 +38,7 @@ input InputProduct {
     id:String
     title: String!
     category: InputProductCategory!
-    quantity: Float!
+    quantity: Int!
     regular_price: Float!
     discount_price: Float!
     image: String!

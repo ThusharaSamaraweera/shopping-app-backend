@@ -8,7 +8,7 @@ export class ProductsController {
     return await productService.getAllProducts();
   }
 
-  @VerifyAdminAuthorization
+  // @VerifyAdminAuthorization
   static async addProduct(ctx: Context, newProduct: INewProduct) {
     return await productService.addProduct(newProduct);
   }

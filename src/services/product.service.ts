@@ -1,12 +1,17 @@
 import { INewProduct } from '../types/productTypes';
+import CategoryService from './category.service';
 
 const Products = require('../models/products');
 
 export default class productService {
   static async addProduct(newProduct: INewProduct){
     try {
+      const categoryId = await CategoryService.findCategory(newProduct.category.title)
+      newProduct.category.id = categoryId._id
       return await Products.create(newProduct);
+
     } catch (err) {
+      console.error(err)
       throw new Error('Failed to create product');
     }
   };
